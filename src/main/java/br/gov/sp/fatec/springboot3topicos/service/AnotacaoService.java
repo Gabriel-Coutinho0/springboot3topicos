@@ -1,5 +1,6 @@
 package br.gov.sp.fatec.springboot3topicos.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +28,11 @@ public class AnotacaoService {
         ){
           throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Deu paia");
         }
+        if(anotacao.getDataHora() == null){
+            anotacao.setDataHora(LocalDateTime.now());
+        }
         Usuario usuario = usuarioService
-            .buscarUsuarioPorId(anotacao.getId());
+            .buscarUsuarioPorId(anotacao.getUsuario().getId());
         anotacao.setUsuario(usuario);
         return anotacaoRepo.save(anotacao);
     }
