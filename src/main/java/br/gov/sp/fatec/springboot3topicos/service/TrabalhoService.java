@@ -17,8 +17,8 @@ public class TrabalhoService {
     @Autowired
     private TrabalhoRepository trabalhoRepo;
 
-    public List<Trabalho> buscarTodosTrabalhos(){
-        List<Trabalho> trabalho = trabalhoRepo.findAll();
+    public List<Trabalho> buscarTodosTrabalhos(String titulo, Integer nota){
+        List<Trabalho> trabalho = trabalhoRepo.findByTituloContainsAndNotaGreaterThan(titulo, nota);
         return trabalho;
     }
 
